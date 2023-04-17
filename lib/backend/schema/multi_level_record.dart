@@ -19,6 +19,8 @@ abstract class MultiLevelRecord
 
   int? get income;
 
+  String? get iconurl;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -26,7 +28,8 @@ abstract class MultiLevelRecord
   static void _initializeBuilder(MultiLevelRecordBuilder builder) => builder
     ..level = 0
     ..count = 0
-    ..income = 0;
+    ..income = 0
+    ..iconurl = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('MultiLevel');
@@ -53,6 +56,7 @@ Map<String, dynamic> createMultiLevelRecordData({
   int? level,
   int? count,
   int? income,
+  String? iconurl,
 }) {
   final firestoreData = serializers.toFirestore(
     MultiLevelRecord.serializer,
@@ -60,7 +64,8 @@ Map<String, dynamic> createMultiLevelRecordData({
       (m) => m
         ..level = level
         ..count = count
-        ..income = income,
+        ..income = income
+        ..iconurl = iconurl,
     ),
   );
 

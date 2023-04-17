@@ -1,6 +1,6 @@
 {
-    "name": "zktrade",
-    "short_name": "zktrade",
+    "name": "ZKT-token",
+    "short_name": "ZKT-token",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

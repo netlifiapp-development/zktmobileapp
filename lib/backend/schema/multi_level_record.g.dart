@@ -39,6 +39,13 @@ class _$MultiLevelRecordSerializer
         ..add('income')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
+    value = object.iconurl;
+    if (value != null) {
+      result
+        ..add('iconurl')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -74,6 +81,10 @@ class _$MultiLevelRecordSerializer
           result.income = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int?;
           break;
+        case 'iconurl':
+          result.iconurl = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -95,13 +106,16 @@ class _$MultiLevelRecord extends MultiLevelRecord {
   @override
   final int? income;
   @override
+  final String? iconurl;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$MultiLevelRecord(
           [void Function(MultiLevelRecordBuilder)? updates]) =>
       (new MultiLevelRecordBuilder()..update(updates))._build();
 
-  _$MultiLevelRecord._({this.level, this.count, this.income, this.ffRef})
+  _$MultiLevelRecord._(
+      {this.level, this.count, this.income, this.iconurl, this.ffRef})
       : super._();
 
   @override
@@ -119,6 +133,7 @@ class _$MultiLevelRecord extends MultiLevelRecord {
         level == other.level &&
         count == other.count &&
         income == other.income &&
+        iconurl == other.iconurl &&
         ffRef == other.ffRef;
   }
 
@@ -128,6 +143,7 @@ class _$MultiLevelRecord extends MultiLevelRecord {
     _$hash = $jc(_$hash, level.hashCode);
     _$hash = $jc(_$hash, count.hashCode);
     _$hash = $jc(_$hash, income.hashCode);
+    _$hash = $jc(_$hash, iconurl.hashCode);
     _$hash = $jc(_$hash, ffRef.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -139,6 +155,7 @@ class _$MultiLevelRecord extends MultiLevelRecord {
           ..add('level', level)
           ..add('count', count)
           ..add('income', income)
+          ..add('iconurl', iconurl)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -160,6 +177,10 @@ class MultiLevelRecordBuilder
   int? get income => _$this._income;
   set income(int? income) => _$this._income = income;
 
+  String? _iconurl;
+  String? get iconurl => _$this._iconurl;
+  set iconurl(String? iconurl) => _$this._iconurl = iconurl;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -174,6 +195,7 @@ class MultiLevelRecordBuilder
       _level = $v.level;
       _count = $v.count;
       _income = $v.income;
+      _iconurl = $v.iconurl;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -197,7 +219,11 @@ class MultiLevelRecordBuilder
   _$MultiLevelRecord _build() {
     final _$result = _$v ??
         new _$MultiLevelRecord._(
-            level: level, count: count, income: income, ffRef: ffRef);
+            level: level,
+            count: count,
+            income: income,
+            iconurl: iconurl,
+            ffRef: ffRef);
     replace(_$result);
     return _$result;
   }

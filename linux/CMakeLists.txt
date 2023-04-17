@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(runner LANGUAGES CXX)
 
-set(BINARY_NAME "zktrade")
+set(BINARY_NAME "ZKT-token")
 set(APPLICATION_ID "com.umyclevrmlmzktokenonlinegg")
 
 cmake_policy(SET CMP0063 NEW)

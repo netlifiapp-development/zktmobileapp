@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
-project(zktrade LANGUAGES CXX)
+project(z_k_t_token LANGUAGES CXX)
 
-set(BINARY_NAME "zktrade")
+set(BINARY_NAME "z_k_t_token")
 
 cmake_policy(SET CMP0063 NEW)
 

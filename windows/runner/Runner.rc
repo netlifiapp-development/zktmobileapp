@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "zktrade" "\0"
+            VALUE "CompanyName", "ZKT-token" "\0"
             VALUE "FileDescription", "A new Flutter project." "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "zktrade" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2022 zktrade. All rights reserved." "\0"
-            VALUE "OriginalFilename", "zktrade.exe" "\0"
-            VALUE "ProductName", "zktrade" "\0"
+            VALUE "InternalName", "ZKT-token" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2022 ZKT-token. All rights reserved." "\0"
+            VALUE "OriginalFilename", "z_k_t_token.exe" "\0"
+            VALUE "ProductName", "ZKT-token" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

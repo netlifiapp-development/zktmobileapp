@@ -1,4 +1,4 @@
-# zktrade
+# ZKT-token
 
 A new Flutter project.
 
