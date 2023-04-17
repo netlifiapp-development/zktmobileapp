@@ -7,12 +7,19 @@ part of 'serializers.dart';
 // **************************************************************************
 
 Serializers _$serializers = (new Serializers().toBuilder()
+      ..add(AllSponsorsStruct.serializer)
       ..add(DatabaseRecord.serializer)
       ..add(DirectRefRecord.serializer)
       ..add(Level1Record.serializer)
       ..add(MultiLevelRecord.serializer)
       ..add(TransactionsRecord.serializer)
       ..add(UserRecord.serializer)
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [
+            const FullType(
+                DocumentReference, const [const FullType.nullable(Object)])
+          ]),
+          () => new ListBuilder<DocumentReference<Object?>>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [
             const FullType(

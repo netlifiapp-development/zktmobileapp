@@ -60,6 +60,8 @@ abstract class UserRecord implements Built<UserRecord, UserRecordBuilder> {
 
   bool? get claimedtoken;
 
+  String? get city;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -80,7 +82,8 @@ abstract class UserRecord implements Built<UserRecord, UserRecordBuilder> {
     ..totalUnilevelIncome = 0
     ..allIncome = 0
     ..upline = ''
-    ..claimedtoken = false;
+    ..claimedtoken = false
+    ..city = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('user');
@@ -120,6 +123,7 @@ Map<String, dynamic> createUserRecordData({
   int? allIncome,
   String? upline,
   bool? claimedtoken,
+  String? city,
 }) {
   final firestoreData = serializers.toFirestore(
     UserRecord.serializer,
@@ -142,7 +146,8 @@ Map<String, dynamic> createUserRecordData({
         ..totalUnilevelIncome = totalUnilevelIncome
         ..allIncome = allIncome
         ..upline = upline
-        ..claimedtoken = claimedtoken,
+        ..claimedtoken = claimedtoken
+        ..city = city,
     ),
   );
 

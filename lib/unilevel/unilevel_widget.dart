@@ -394,7 +394,12 @@ class _UnilevelWidgetState extends State<UnilevelWidget> {
                                   .primaryBackground,
                             ),
                             child: StreamBuilder<List<MultiLevelRecord>>(
-                              stream: queryMultiLevelRecord(),
+                              stream: queryMultiLevelRecord(
+                                queryBuilder: (multiLevelRecord) =>
+                                    multiLevelRecord.orderBy('Level',
+                                        descending: true),
+                                limit: 10,
+                              ),
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.
                                 if (!snapshot.hasData) {

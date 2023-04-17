@@ -1,6 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -55,6 +56,45 @@ class _UpdateprofileWidgetState extends State<UpdateprofileWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          automaticallyImplyLeading: false,
+          title: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Update Profile',
+                style: FlutterFlowTheme.of(context).headlineMedium.override(
+                      fontFamily:
+                          FlutterFlowTheme.of(context).headlineMediumFamily,
+                      color: FlutterFlowTheme.of(context).primaryText,
+                      fontSize: 20.0,
+                      useGoogleFonts: GoogleFonts.asMap().containsKey(
+                          FlutterFlowTheme.of(context).headlineMediumFamily),
+                    ),
+              ),
+              FlutterFlowIconButton(
+                borderColor: Colors.transparent,
+                borderRadius: 20.0,
+                borderWidth: 1.0,
+                buttonSize: 40.0,
+                fillColor: Color(0xFF127C6F),
+                icon: Icon(
+                  Icons.close_rounded,
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                  size: 20.0,
+                ),
+                onPressed: () async {
+                  context.safePop();
+                },
+              ),
+            ],
+          ),
+          actions: [],
+          centerTitle: false,
+          elevation: 0.0,
+        ),
         body: Padding(
           padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
           child: Container(
@@ -376,11 +416,27 @@ class _UpdateprofileWidgetState extends State<UpdateprofileWidget> {
                         child: FFButtonWidget(
                           onPressed: () async {
                             final userUpdateData = createUserRecordData(
-                              displayName: _model.yourNameController.text,
-                              photoUrl: _model.uploadedFileUrl,
+                              displayName: valueOrDefault<String>(
+                                _model.yourNameController.text,
+                                'Your Name',
+                              ),
+                              photoUrl: valueOrDefault<String>(
+                                _model.uploadedFileUrl,
+                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/unilevr-677lfs/assets/buv6rwe6di8d/3d-.png',
+                              ),
                               createdTime: getCurrentTimestamp,
-                              phoneNumber: _model.phoneController.text,
-                              zKTWalletAddress: _model.zktwalletController.text,
+                              phoneNumber: valueOrDefault<String>(
+                                _model.phoneController.text,
+                                '09012345678',
+                              ),
+                              zKTWalletAddress: valueOrDefault<String>(
+                                _model.zktwalletController.text,
+                                'https://stellar.expert/explorer/public/asset/ZKT-GDRGEMHJKJ6ARGIZAXGPHBYJ4GV3T2LEMZAWHBCEEV4RCEQBRAN7N7N6',
+                              ),
+                              city: valueOrDefault<String>(
+                                valueOrDefault(currentUserDocument?.city, ''),
+                                'Lost City',
+                              ),
                             );
                             await currentUserReference!.update(userUpdateData);
 
@@ -402,55 +458,6 @@ class _UpdateprofileWidgetState extends State<UpdateprofileWidget> {
                                       .titleMediumFamily,
                                   color: FlutterFlowTheme.of(context)
                                       .primaryBtnText,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .titleMediumFamily),
-                                ),
-                            elevation: 2.0,
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: AlignmentDirectional(0.0, 0.05),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            20.0, 24.0, 20.0, 0.0),
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            context.pushNamed(
-                              'Dashboard',
-                              extra: <String, dynamic>{
-                                kTransitionInfoKey: TransitionInfo(
-                                  hasTransition: true,
-                                  transitionType:
-                                      PageTransitionType.bottomToTop,
-                                ),
-                              },
-                            );
-                          },
-                          text: 'Skip for now',
-                          options: FFButtonOptions(
-                            width: 343.3,
-                            height: 63.3,
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color:
-                                FlutterFlowTheme.of(context).primaryBackground,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleMedium
-                                .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .titleMediumFamily,
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
                                   useGoogleFonts: GoogleFonts.asMap()
                                       .containsKey(FlutterFlowTheme.of(context)
                                           .titleMediumFamily),

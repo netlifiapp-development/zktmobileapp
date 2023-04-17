@@ -13,7 +13,12 @@ import 'register_model.dart';
 export 'register_model.dart';
 
 class RegisterWidget extends StatefulWidget {
-  const RegisterWidget({Key? key}) : super(key: key);
+  const RegisterWidget({
+    Key? key,
+    this.sponsorvalis,
+  }) : super(key: key);
+
+  final String? sponsorvalis;
 
   @override
   _RegisterWidgetState createState() => _RegisterWidgetState();
@@ -139,12 +144,14 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                     child: TextFormField(
                                       controller: _model.refferredbyController,
                                       autofocus: true,
-                                      autofillHints: [AutofillHints.email],
+                                      autofillHints: [
+                                        AutofillHints.oneTimeCode
+                                      ],
+                                      textCapitalization:
+                                          TextCapitalization.characters,
                                       obscureText: false,
                                       decoration: InputDecoration(
                                         labelText: 'Sponsor ID',
-                                        labelStyle: FlutterFlowTheme.of(context)
-                                            .labelMedium,
                                         hintText: 'e.g    ZKT000001',
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
@@ -191,6 +198,10 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                       validator: _model
                                           .refferredbyControllerValidator
                                           .asValidator(context),
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.allow(
+                                            RegExp('[a-zA-Z0-9]'))
+                                      ],
                                     ),
                                   ),
                                 ),
@@ -422,64 +433,77 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 16.0),
                                   child: FFButtonWidget(
-                                    onPressed: () async {
-                                      GoRouter.of(context).prepareAuthEvent();
-                                      if (_model.passwordController.text !=
-                                          _model
-                                              .passwordConfirmController.text) {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                            content: Text(
-                                              'Passwords don\'t match!',
-                                            ),
-                                          ),
-                                        );
-                                        return;
-                                      }
+                                    onPressed: _model
+                                                .refferredbyController.text !=
+                                            ''
+                                        ? null
+                                        : () async {
+                                            GoRouter.of(context)
+                                                .prepareAuthEvent();
+                                            if (_model
+                                                    .passwordController.text !=
+                                                _model.passwordConfirmController
+                                                    .text) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                    'Passwords don\'t match!',
+                                                  ),
+                                                ),
+                                              );
+                                              return;
+                                            }
 
-                                      final user = await authManager
-                                          .createAccountWithEmail(
-                                        context,
-                                        _model.emailAddressController.text,
-                                        _model.passwordController.text,
-                                      );
-                                      if (user == null) {
-                                        return;
-                                      }
+                                            final user = await authManager
+                                                .createAccountWithEmail(
+                                              context,
+                                              _model
+                                                  .emailAddressController.text,
+                                              _model.passwordController.text,
+                                            );
+                                            if (user == null) {
+                                              return;
+                                            }
 
-                                      final userCreateData =
-                                          createUserRecordData(
-                                        email: '',
-                                        sponsorID:
-                                            _model.refferredbyController.text,
-                                        refferralID:
-                                            'ZKT${valueOrDefault<String>(
-                                          random_data
-                                              .randomInteger(000001, 999999)
-                                              .toString(),
-                                          '123456',
-                                        )}',
-                                        claimedtoken: false,
-                                      );
-                                      await UserRecord.collection
-                                          .doc(user.uid)
-                                          .update(userCreateData);
+                                            final userCreateData =
+                                                createUserRecordData(
+                                              email: '',
+                                              sponsorID: valueOrDefault<String>(
+                                                _model
+                                                    .refferredbyController.text,
+                                                'ZKT010101',
+                                              ),
+                                              refferralID:
+                                                  'ZKT${valueOrDefault<String>(
+                                                random_data
+                                                    .randomInteger(
+                                                        000001, 999999)
+                                                    .toString(),
+                                                '123456',
+                                              )}',
+                                              claimedtoken: false,
+                                            );
+                                            await UserRecord.collection
+                                                .doc(user.uid)
+                                                .update(userCreateData);
 
-                                      HapticFeedback.heavyImpact();
+                                            HapticFeedback.heavyImpact();
 
-                                      context.pushNamedAuth(
-                                        'Updateprofile',
-                                        mounted,
-                                        extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
-                                            hasTransition: true,
-                                            transitionType:
-                                                PageTransitionType.bottomToTop,
-                                          ),
-                                        },
-                                      );
-                                    },
+                                            context.pushNamedAuth(
+                                              'Updateprofile',
+                                              mounted,
+                                              extra: <String, dynamic>{
+                                                kTransitionInfoKey:
+                                                    TransitionInfo(
+                                                  hasTransition: true,
+                                                  transitionType:
+                                                      PageTransitionType
+                                                          .bottomToTop,
+                                                ),
+                                              },
+                                            );
+                                          },
                                     text: 'Create Account',
                                     options: FFButtonOptions(
                                       width: 370.0,

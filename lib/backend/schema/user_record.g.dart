@@ -145,6 +145,13 @@ class _$UserRecordSerializer implements StructuredSerializer<UserRecord> {
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
+    value = object.city;
+    if (value != null) {
+      result
+        ..add('city')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -244,6 +251,10 @@ class _$UserRecordSerializer implements StructuredSerializer<UserRecord> {
           result.claimedtoken = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool?;
           break;
+        case 'city':
+          result.city = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -295,6 +306,8 @@ class _$UserRecord extends UserRecord {
   @override
   final bool? claimedtoken;
   @override
+  final String? city;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$UserRecord([void Function(UserRecordBuilder)? updates]) =>
@@ -319,6 +332,7 @@ class _$UserRecord extends UserRecord {
       this.allIncome,
       this.upline,
       this.claimedtoken,
+      this.city,
       this.ffRef})
       : super._();
 
@@ -351,6 +365,7 @@ class _$UserRecord extends UserRecord {
         allIncome == other.allIncome &&
         upline == other.upline &&
         claimedtoken == other.claimedtoken &&
+        city == other.city &&
         ffRef == other.ffRef;
   }
 
@@ -375,6 +390,7 @@ class _$UserRecord extends UserRecord {
     _$hash = $jc(_$hash, allIncome.hashCode);
     _$hash = $jc(_$hash, upline.hashCode);
     _$hash = $jc(_$hash, claimedtoken.hashCode);
+    _$hash = $jc(_$hash, city.hashCode);
     _$hash = $jc(_$hash, ffRef.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -401,6 +417,7 @@ class _$UserRecord extends UserRecord {
           ..add('allIncome', allIncome)
           ..add('upline', upline)
           ..add('claimedtoken', claimedtoken)
+          ..add('city', city)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -487,6 +504,10 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
   bool? get claimedtoken => _$this._claimedtoken;
   set claimedtoken(bool? claimedtoken) => _$this._claimedtoken = claimedtoken;
 
+  String? _city;
+  String? get city => _$this._city;
+  set city(String? city) => _$this._city = city;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -516,6 +537,7 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
       _allIncome = $v.allIncome;
       _upline = $v.upline;
       _claimedtoken = $v.claimedtoken;
+      _city = $v.city;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -559,6 +581,7 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
               allIncome: allIncome,
               upline: upline,
               claimedtoken: claimedtoken,
+              city: city,
               ffRef: ffRef);
     } catch (_) {
       late String _$failedField;

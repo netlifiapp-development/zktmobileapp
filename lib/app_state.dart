@@ -25,22 +25,22 @@ class FFAppState extends ChangeNotifier {
 
   late SharedPreferences prefs;
 
-  List<int> _Direct = [];
-  List<int> get Direct => _Direct;
-  set Direct(List<int> _value) {
-    _Direct = _value;
+  List<DocumentReference> _RefferralID = [];
+  List<DocumentReference> get RefferralID => _RefferralID;
+  set RefferralID(List<DocumentReference> _value) {
+    _RefferralID = _value;
   }
 
-  void addToDirect(int _value) {
-    _Direct.add(_value);
+  void addToRefferralID(DocumentReference _value) {
+    _RefferralID.add(_value);
   }
 
-  void removeFromDirect(int _value) {
-    _Direct.remove(_value);
+  void removeFromRefferralID(DocumentReference _value) {
+    _RefferralID.remove(_value);
   }
 
-  void removeAtIndexFromDirect(int _index) {
-    _Direct.removeAt(_index);
+  void removeAtIndexFromRefferralID(int _index) {
+    _RefferralID.removeAt(_index);
   }
 }
 

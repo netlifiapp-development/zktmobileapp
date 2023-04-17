@@ -85,7 +85,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Register',
           path: '/register',
-          builder: (context, params) => RegisterWidget(),
+          builder: (context, params) => RegisterWidget(
+            sponsorvalis: params.getParam('sponsorvalis', ParamType.String),
+          ),
         ),
         FFRoute(
           name: 'QRCode',

@@ -23,6 +23,7 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   MultiLevelRecord,
   Level1Record,
   DirectRefRecord,
+  AllSponsorsStruct,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(DocumentReferenceSerializer())
