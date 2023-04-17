@@ -126,6 +126,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'Lobstr',
           path: '/lobstr',
           builder: (context, params) => LobstrWidget(),
+        ),
+        FFRoute(
+          name: 'Addwallet',
+          path: '/addwallet',
+          builder: (context, params) => AddwalletWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       urlPathStrategy: UrlPathStrategy.path,

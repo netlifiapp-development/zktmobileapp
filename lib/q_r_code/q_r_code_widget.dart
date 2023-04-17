@@ -233,8 +233,8 @@ class _QRCodeWidgetState extends State<QRCodeWidget>
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 25.0, 0.0, 16.0),
                                   child: FFButtonWidget(
-                                    onPressed: () {
-                                      print('Button pressed ...');
+                                    onPressed: () async {
+                                      context.safePop();
                                     },
                                     text: 'Back',
                                     options: FFButtonOptions(

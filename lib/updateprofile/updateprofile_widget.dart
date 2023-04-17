@@ -416,6 +416,55 @@ class _UpdateprofileWidgetState extends State<UpdateprofileWidget> {
                         ),
                       ),
                     ),
+                    Align(
+                      alignment: AlignmentDirectional(0.0, 0.05),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            20.0, 24.0, 20.0, 0.0),
+                        child: FFButtonWidget(
+                          onPressed: () async {
+                            context.pushNamed(
+                              'Dashboard',
+                              extra: <String, dynamic>{
+                                kTransitionInfoKey: TransitionInfo(
+                                  hasTransition: true,
+                                  transitionType:
+                                      PageTransitionType.bottomToTop,
+                                ),
+                              },
+                            );
+                          },
+                          text: 'Skip for now',
+                          options: FFButtonOptions(
+                            width: 343.3,
+                            height: 63.3,
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 0.0),
+                            iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 0.0),
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .titleMedium
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .titleMediumFamily,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .titleMediumFamily),
+                                ),
+                            elevation: 2.0,
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),

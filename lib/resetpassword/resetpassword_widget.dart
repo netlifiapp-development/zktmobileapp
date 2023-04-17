@@ -143,14 +143,14 @@ class _ResetpasswordWidgetState extends State<ResetpasswordWidget>
                     child: Container(
                       width: double.infinity,
                       constraints: BoxConstraints(
-                        maxWidth: 570.0,
+                        maxWidth: double.infinity,
                       ),
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).accent3,
                         boxShadow: [
                           BoxShadow(
                             blurRadius: 4.0,
-                            color: Color(0x33000000),
+                            color: Color(0xB2FFEBEB),
                             offset: Offset(0.0, 2.0),
                           )
                         ],
@@ -274,8 +274,7 @@ class _ResetpasswordWidgetState extends State<ResetpasswordWidget>
                                         0.0, 0.0, 0.0, 0.0),
                                     iconPadding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
+                                    color: FlutterFlowTheme.of(context).success,
                                     textStyle: FlutterFlowTheme.of(context)
                                         .titleSmall
                                         .override(

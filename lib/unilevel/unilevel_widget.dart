@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -194,7 +195,7 @@ class _UnilevelWidgetState extends State<UnilevelWidget> {
                                         .itemList![listViewIndex];
                                     return Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          16.0, 8.0, 16.0, 0.0),
+                                          16.0, 15.0, 16.0, 0.0),
                                       child: Container(
                                         width: double.infinity,
                                         decoration: BoxDecoration(
@@ -222,8 +223,9 @@ class _UnilevelWidgetState extends State<UnilevelWidget> {
                                               ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(8.0),
-                                                child: Image.network(
-                                                  valueOrDefault<String>(
+                                                child: CachedNetworkImage(
+                                                  imageUrl:
+                                                      valueOrDefault<String>(
                                                     listViewUserRecord.photoUrl,
                                                     'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/unilevr-677lfs/assets/buv6rwe6di8d/3d-.png',
                                                   ),
@@ -397,7 +399,7 @@ class _UnilevelWidgetState extends State<UnilevelWidget> {
                               children: [
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      16.0, 8.0, 16.0, 0.0),
+                                      16.0, 15.0, 16.0, 0.0),
                                   child: AuthUserStreamWidget(
                                     builder: (context) =>
                                         StreamBuilder<List<UserRecord>>(
@@ -988,7 +990,7 @@ class _UnilevelWidgetState extends State<UnilevelWidget> {
                             height: 100.0,
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
+                                  .secondaryBackground,
                             ),
                             child: SingleChildScrollView(
                               child: Column(
@@ -1306,147 +1308,199 @@ class _UnilevelWidgetState extends State<UnilevelWidget> {
                                       width: double.infinity,
                                       height: 631.8,
                                       decoration: BoxDecoration(),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 12.0, 0.0, 24.0),
-                                        child: StreamBuilder<
-                                            List<TransactionsRecord>>(
-                                          stream: queryTransactionsRecord(),
-                                          builder: (context, snapshot) {
-                                            // Customize what your widget looks like when it's loading.
-                                            if (!snapshot.hasData) {
-                                              return Center(
-                                                child: SizedBox(
-                                                  width: 50.0,
-                                                  height: 50.0,
-                                                  child:
-                                                      CircularProgressIndicator(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .success,
+                                      child: Align(
+                                        alignment:
+                                            AlignmentDirectional(0.0, 0.0),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 12.0, 0.0, 24.0),
+                                          child: StreamBuilder<
+                                              List<TransactionsRecord>>(
+                                            stream: queryTransactionsRecord(),
+                                            builder: (context, snapshot) {
+                                              // Customize what your widget looks like when it's loading.
+                                              if (!snapshot.hasData) {
+                                                return Center(
+                                                  child: SizedBox(
+                                                    width: 50.0,
+                                                    height: 50.0,
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .success,
+                                                    ),
                                                   ),
-                                                ),
-                                              );
-                                            }
-                                            List<TransactionsRecord>
-                                                transactionListTransactionsRecordList =
-                                                snapshot.data!;
-                                            if (transactionListTransactionsRecordList
-                                                .isEmpty) {
-                                              return Center(
-                                                child: Image.asset(
-                                                  'assets/images/116072-socialv-no-data.gif',
-                                                  width: 200.0,
-                                                  height: 400.0,
-                                                  fit: BoxFit.fitWidth,
-                                                ),
-                                              );
-                                            }
-                                            return SingleChildScrollView(
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: List.generate(
-                                                    transactionListTransactionsRecordList
-                                                        .length,
-                                                    (transactionListIndex) {
-                                                  final transactionListTransactionsRecord =
-                                                      transactionListTransactionsRecordList[
-                                                          transactionListIndex];
-                                                  return Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(4.0, 0.0,
-                                                                4.0, 16.0),
-                                                    child: Container(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width *
-                                                              0.92,
-                                                      height: 70.0,
-                                                      decoration: BoxDecoration(
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .secondaryBackground,
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            blurRadius: 3.0,
-                                                            color: Color(
-                                                                0x35000000),
-                                                            offset: Offset(
-                                                                0.0, 1.0),
-                                                          )
-                                                        ],
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8.0),
-                                                        border: Border.all(
+                                                );
+                                              }
+                                              List<TransactionsRecord>
+                                                  transactionListTransactionsRecordList =
+                                                  snapshot.data!;
+                                              if (transactionListTransactionsRecordList
+                                                  .isEmpty) {
+                                                return Center(
+                                                  child: Image.asset(
+                                                    'assets/images/nodatafound-removebg-preview.png',
+                                                    width: 400.0,
+                                                    height: 400.0,
+                                                    fit: BoxFit.contain,
+                                                  ),
+                                                );
+                                              }
+                                              return SingleChildScrollView(
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: List.generate(
+                                                      transactionListTransactionsRecordList
+                                                          .length,
+                                                      (transactionListIndex) {
+                                                    final transactionListTransactionsRecord =
+                                                        transactionListTransactionsRecordList[
+                                                            transactionListIndex];
+                                                    return Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  4.0,
+                                                                  0.0,
+                                                                  4.0,
+                                                                  16.0),
+                                                      child: Container(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            0.92,
+                                                        height: 70.0,
+                                                        decoration:
+                                                            BoxDecoration(
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .primaryBackground,
-                                                          width: 1.0,
+                                                              .secondaryBackground,
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              blurRadius: 3.0,
+                                                              color: Color(
+                                                                  0x35000000),
+                                                              offset: Offset(
+                                                                  0.0, 1.0),
+                                                            )
+                                                          ],
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      8.0),
+                                                          border: Border.all(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryBackground,
+                                                            width: 1.0,
+                                                          ),
                                                         ),
-                                                      ),
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    4.0,
-                                                                    4.0,
-                                                                    4.0,
-                                                                    4.0),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                              child: Card(
-                                                                clipBehavior: Clip
-                                                                    .antiAliasWithSaveLayer,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primary,
-                                                                shape:
-                                                                    RoundedRectangleBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              40.0),
-                                                                ),
-                                                                child: Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          8.0,
-                                                                          8.0,
-                                                                          8.0,
-                                                                          8.0),
-                                                                  child: Icon(
-                                                                    Icons
-                                                                        .monetization_on_rounded,
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .tertiary,
-                                                                    size: 24.0,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            Expanded(
-                                                              child: Padding(
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      4.0,
+                                                                      4.0,
+                                                                      4.0,
+                                                                      4.0),
+                                                          child: Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: [
+                                                              Padding(
                                                                 padding:
                                                                     EdgeInsetsDirectional
                                                                         .fromSTEB(
-                                                                            12.0,
+                                                                            8.0,
                                                                             0.0,
                                                                             0.0,
                                                                             0.0),
+                                                                child: Card(
+                                                                  clipBehavior:
+                                                                      Clip.antiAliasWithSaveLayer,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primary,
+                                                                  shape:
+                                                                      RoundedRectangleBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            40.0),
+                                                                  ),
+                                                                  child:
+                                                                      Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            8.0,
+                                                                            8.0,
+                                                                            8.0,
+                                                                            8.0),
+                                                                    child: Icon(
+                                                                      Icons
+                                                                          .monetization_on_rounded,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .tertiary,
+                                                                      size:
+                                                                          24.0,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              Expanded(
+                                                                child: Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          12.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                                  child: Column(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Text(
+                                                                        'Go Far Rewards',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .titleMedium,
+                                                                      ),
+                                                                      Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            0.0,
+                                                                            4.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                        child:
+                                                                            Text(
+                                                                          'Income',
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).bodyMedium,
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              Padding(
+                                                                padding: EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        12.0,
+                                                                        0.0,
+                                                                        12.0,
+                                                                        0.0),
                                                                 child: Column(
                                                                   mainAxisSize:
                                                                       MainAxisSize
@@ -1456,13 +1510,16 @@ class _UnilevelWidgetState extends State<UnilevelWidget> {
                                                                           .center,
                                                                   crossAxisAlignment:
                                                                       CrossAxisAlignment
-                                                                          .start,
+                                                                          .end,
                                                                   children: [
                                                                     Text(
-                                                                      'Go Far Rewards',
+                                                                      '\$50.00',
+                                                                      textAlign:
+                                                                          TextAlign
+                                                                              .end,
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .titleMedium,
+                                                                          .titleSmall,
                                                                     ),
                                                                     Padding(
                                                                       padding: EdgeInsetsDirectional.fromSTEB(
@@ -1472,82 +1529,32 @@ class _UnilevelWidgetState extends State<UnilevelWidget> {
                                                                           0.0),
                                                                       child:
                                                                           Text(
-                                                                        'Income',
+                                                                        'Tues. 15, 4:32',
+                                                                        textAlign:
+                                                                            TextAlign.end,
                                                                         style: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium,
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                              color: FlutterFlowTheme.of(context).grayIcon,
+                                                                              fontSize: 12.0,
+                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                            ),
                                                                       ),
                                                                     ),
                                                                   ],
                                                                 ),
                                                               ),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          12.0,
-                                                                          0.0,
-                                                                          12.0,
-                                                                          0.0),
-                                                              child: Column(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .end,
-                                                                children: [
-                                                                  Text(
-                                                                    '\$50.00',
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .end,
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .titleSmall,
-                                                                  ),
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            4.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                    child: Text(
-                                                                      'Tues. 15, 4:32',
-                                                                      textAlign:
-                                                                          TextAlign
-                                                                              .end,
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).grayIcon,
-                                                                            fontSize:
-                                                                                12.0,
-                                                                            useGoogleFonts:
-                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                          ),
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ],
+                                                            ],
+                                                          ),
                                                         ),
                                                       ),
-                                                    ),
-                                                  );
-                                                }),
-                                              ),
-                                            );
-                                          },
+                                                    );
+                                                  }),
+                                                ),
+                                              );
+                                            },
+                                          ),
                                         ),
                                       ),
                                     ),
