@@ -11,6 +11,8 @@ import 'schema/transactions_record.dart';
 import 'schema/multi_level_record.dart';
 import 'schema/level1_record.dart';
 import 'schema/direct_ref_record.dart';
+import 'schema/sponsoring_user_record.dart';
+import 'schema/commissions_record.dart';
 import 'schema/serializers.dart';
 
 export 'dart:async' show StreamSubscription;
@@ -24,6 +26,8 @@ export 'schema/transactions_record.dart';
 export 'schema/multi_level_record.dart';
 export 'schema/level1_record.dart';
 export 'schema/direct_ref_record.dart';
+export 'schema/sponsoring_user_record.dart';
+export 'schema/commissions_record.dart';
 
 /// Functions to query DatabaseRecords (as a Stream and as a Future).
 Future<int> queryDatabaseRecordCount({
@@ -339,6 +343,110 @@ Future<FFFirestorePage<DirectRefRecord>> queryDirectRefRecordPage({
     queryCollectionPage(
       DirectRefRecord.collection(parent),
       DirectRefRecord.serializer,
+      queryBuilder: queryBuilder,
+      nextPageMarker: nextPageMarker,
+      pageSize: pageSize,
+      isStream: isStream,
+    );
+
+/// Functions to query SponsoringUserRecords (as a Stream and as a Future).
+Future<int> querySponsoringUserRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      SponsoringUserRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<SponsoringUserRecord>> querySponsoringUserRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      SponsoringUserRecord.collection,
+      SponsoringUserRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<SponsoringUserRecord>> querySponsoringUserRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      SponsoringUserRecord.collection,
+      SponsoringUserRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<FFFirestorePage<SponsoringUserRecord>> querySponsoringUserRecordPage({
+  Query Function(Query)? queryBuilder,
+  DocumentSnapshot? nextPageMarker,
+  required int pageSize,
+  required bool isStream,
+}) =>
+    queryCollectionPage(
+      SponsoringUserRecord.collection,
+      SponsoringUserRecord.serializer,
+      queryBuilder: queryBuilder,
+      nextPageMarker: nextPageMarker,
+      pageSize: pageSize,
+      isStream: isStream,
+    );
+
+/// Functions to query CommissionsRecords (as a Stream and as a Future).
+Future<int> queryCommissionsRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      CommissionsRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<CommissionsRecord>> queryCommissionsRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      CommissionsRecord.collection,
+      CommissionsRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<CommissionsRecord>> queryCommissionsRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      CommissionsRecord.collection,
+      CommissionsRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<FFFirestorePage<CommissionsRecord>> queryCommissionsRecordPage({
+  Query Function(Query)? queryBuilder,
+  DocumentSnapshot? nextPageMarker,
+  required int pageSize,
+  required bool isStream,
+}) =>
+    queryCollectionPage(
+      CommissionsRecord.collection,
+      CommissionsRecord.serializer,
       queryBuilder: queryBuilder,
       nextPageMarker: nextPageMarker,
       pageSize: pageSize,

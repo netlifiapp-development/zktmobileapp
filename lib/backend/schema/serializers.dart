@@ -7,6 +7,8 @@ import 'transactions_record.dart';
 import 'multi_level_record.dart';
 import 'level1_record.dart';
 import 'direct_ref_record.dart';
+import 'sponsoring_user_record.dart';
+import 'commissions_record.dart';
 
 import 'index.dart';
 
@@ -23,6 +25,8 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   MultiLevelRecord,
   Level1Record,
   DirectRefRecord,
+  SponsoringUserRecord,
+  CommissionsRecord,
   AllSponsorsStruct,
 ])
 final Serializers serializers = (_$serializers.toBuilder()

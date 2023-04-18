@@ -38,8 +38,6 @@ class _SettingsWidgetState extends State<SettingsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -387,29 +385,36 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                   ),
                 ),
                 Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(16.0, 20.0, 16.0, 20.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 20.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(2.0, 0.0, 2.0, 0.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            20.0, 30.0, 20.0, 0.0),
                         child: FFButtonWidget(
                           onPressed: () async {
                             GoRouter.of(context).prepareAuthEvent();
                             await authManager.signOut();
                             GoRouter.of(context).clearRedirectLocation();
 
-                            await launchURL('zktrade.co');
-
-                            context.goNamedAuth('Login', mounted);
+                            context.pushNamedAuth(
+                              'Login',
+                              mounted,
+                              extra: <String, dynamic>{
+                                kTransitionInfoKey: TransitionInfo(
+                                  hasTransition: true,
+                                  transitionType:
+                                      PageTransitionType.bottomToTop,
+                                ),
+                              },
+                            );
                           },
                           text: 'Log Out',
                           options: FFButtonOptions(
-                            width: 340.5,
-                            height: 59.6,
+                            width: 346.5,
+                            height: 60.0,
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
                             iconPadding: EdgeInsetsDirectional.fromSTEB(

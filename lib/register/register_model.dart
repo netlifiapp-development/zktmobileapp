@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/random_data_util.dart' as random_data;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -27,6 +28,8 @@ class RegisterModel extends FlutterFlowModel {
   TextEditingController? passwordConfirmController;
   late bool passwordConfirmVisibility;
   String? Function(BuildContext, String?)? passwordConfirmControllerValidator;
+  // Stores action output result for [Backend Call - Create Document] action in Button widget.
+  CommissionsRecord? lvl1;
 
   /// Initialization and disposal methods.
 

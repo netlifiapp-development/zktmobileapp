@@ -43,8 +43,6 @@ class _DashboardWidgetState extends State<DashboardWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -244,123 +242,165 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.92,
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 6.0,
-                            color: Color(0x4B1A1F24),
-                            offset: Offset(0.0, 2.0),
-                          )
-                        ],
-                        gradient: LinearGradient(
-                          colors: [
-                            FlutterFlowTheme.of(context).alternate,
-                            FlutterFlowTheme.of(context).secondary
-                          ],
-                          stops: [0.0, 1.0],
-                          begin: AlignmentDirectional(0.94, -1.0),
-                          end: AlignmentDirectional(-0.94, 1.0),
+                    AuthUserStreamWidget(
+                      builder: (context) =>
+                          StreamBuilder<List<CommissionsRecord>>(
+                        stream: queryCommissionsRecord(
+                          queryBuilder: (commissionsRecord) =>
+                              commissionsRecord.where('user_id',
+                                  isEqualTo: valueOrDefault(
+                                      currentUserDocument?.refferralID, '')),
+                          singleRecord: true,
                         ),
-                        borderRadius: BorderRadius.circular(8.0),
-                        border: Border.all(
-                          color: FlutterFlowTheme.of(context).warning,
-                        ),
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                20.0, 30.0, 20.0, 15.0),
-                            child: Row(
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 50.0,
+                                height: 50.0,
+                                child: CircularProgressIndicator(
+                                  color: FlutterFlowTheme.of(context).success,
+                                ),
+                              ),
+                            );
+                          }
+                          List<CommissionsRecord>
+                              containerCommissionsRecordList = snapshot.data!;
+                          final containerCommissionsRecord =
+                              containerCommissionsRecordList.isNotEmpty
+                                  ? containerCommissionsRecordList.first
+                                  : null;
+                          return Container(
+                            width: MediaQuery.of(context).size.width * 0.92,
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 6.0,
+                                  color: Color(0x4B1A1F24),
+                                  offset: Offset(0.0, 2.0),
+                                )
+                              ],
+                              gradient: LinearGradient(
+                                colors: [
+                                  FlutterFlowTheme.of(context).alternate,
+                                  FlutterFlowTheme.of(context).secondary
+                                ],
+                                stops: [0.0, 1.0],
+                                begin: AlignmentDirectional(0.94, -1.0),
+                                end: AlignmentDirectional(-0.94, 1.0),
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                              border: Border.all(
+                                color: FlutterFlowTheme.of(context).warning,
+                              ),
+                            ),
+                            child: Column(
                               mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 25.0, 0.0),
-                                  child: AuthUserStreamWidget(
-                                    builder: (context) => AutoSizeText(
-                                      'ZKT ${valueOrDefault<String>(
-                                        valueOrDefault(
-                                                currentUserDocument?.zKTBalance,
-                                                0)
-                                            .toString(),
-                                        '00.00',
-                                      )}'
-                                          .maybeHandleOverflow(maxChars: 8),
-                                      maxLines: 1,
-                                      style: FlutterFlowTheme.of(context)
-                                          .displaySmall
-                                          .override(
-                                            fontFamily:
-                                                FlutterFlowTheme.of(context)
-                                                    .displaySmallFamily,
-                                            color: FlutterFlowTheme.of(context)
-                                                .accent3,
-                                            fontSize: 26.0,
-                                            fontWeight: FontWeight.w600,
-                                            useGoogleFonts: GoogleFonts.asMap()
-                                                .containsKey(
+                                      20.0, 30.0, 20.0, 15.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 25.0, 0.0),
+                                        child: AutoSizeText(
+                                          valueOrDefault<String>(
+                                            formatNumber(
+                                              valueOrDefault(
+                                                  currentUserDocument
+                                                      ?.allIncome,
+                                                  0),
+                                              formatType: FormatType.decimal,
+                                              decimalType:
+                                                  DecimalType.automatic,
+                                              currency: 'ZKT ',
+                                            ),
+                                            'ZKT 0.00',
+                                          ).maybeHandleOverflow(maxChars: 8),
+                                          maxLines: 1,
+                                          style: FlutterFlowTheme.of(context)
+                                              .displaySmall
+                                              .override(
+                                                fontFamily:
                                                     FlutterFlowTheme.of(context)
-                                                        .displaySmallFamily),
-                                          ),
-                                    ),
-                                  ),
-                                ),
-                                Image.asset(
-                                  'assets/images/C3gGvadlelD4E_(1).png',
-                                  width: 50.0,
-                                  height: 50.0,
-                                  fit: BoxFit.contain,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                4.0, 0.0, 4.0, 4.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      15.0, 0.0, 0.0, 25.0),
-                                  child: Icon(
-                                    Icons.card_giftcard_outlined,
-                                    color: Color(0xFF2A0A0C),
-                                    size: 24.0,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      5.0, 5.0, 0.0, 25.0),
-                                  child: AutoSizeText(
-                                    'Claim ZKT When you Add your Lobstr Wallet',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMediumFamily,
-                                          color: FlutterFlowTheme.of(context)
-                                              .textColor,
-                                          fontSize: 12.0,
-                                          fontWeight: FontWeight.normal,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey(
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMediumFamily),
+                                                        .displaySmallFamily,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .accent3,
+                                                fontSize: 26.0,
+                                                fontWeight: FontWeight.w600,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .displaySmallFamily),
+                                              ),
                                         ),
+                                      ),
+                                      Image.asset(
+                                        'assets/images/C3gGvadlelD4E_(1).png',
+                                        width: 50.0,
+                                        height: 50.0,
+                                        fit: BoxFit.contain,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      4.0, 0.0, 4.0, 4.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            15.0, 0.0, 0.0, 25.0),
+                                        child: Icon(
+                                          Icons.card_giftcard_outlined,
+                                          color: Color(0xFF2A0A0C),
+                                          size: 24.0,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            5.0, 5.0, 0.0, 25.0),
+                                        child: AutoSizeText(
+                                          'Claim ZKT When you Add your Lobstr Wallet',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMediumFamily,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .textColor,
+                                                fontSize: 12.0,
+                                                fontWeight: FontWeight.normal,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMediumFamily),
+                                              ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ],
                             ),
-                          ),
-                        ],
+                          );
+                        },
                       ),
                     ),
                   ],
@@ -638,8 +678,13 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                               color: FlutterFlowTheme.of(context).error,
                               size: 30.0,
                             ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
+                            onPressed: () async {
+                              if (currentUserEmail ==
+                                  'admin@netlifiapp.online') {
+                                context.pushNamed('LevelData');
+                              } else {
+                                return;
+                              }
                             },
                           ),
                         ],
@@ -652,7 +697,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
                 child: Container(
                   width: 387.3,
-                  height: 447.5,
+                  height: 354.4,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                   ),

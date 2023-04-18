@@ -133,6 +133,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'Addwallet',
           path: '/addwallet',
           builder: (context, params) => AddwalletWidget(),
+        ),
+        FFRoute(
+          name: 'LevelData',
+          path: '/levelData',
+          builder: (context, params) => LevelDataWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       urlPathStrategy: UrlPathStrategy.path,

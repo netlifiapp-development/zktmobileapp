@@ -31,15 +31,6 @@ abstract class UserRecord implements Built<UserRecord, UserRecordBuilder> {
   @BuiltValueField(wireName: 'Sponsor_ID')
   String? get sponsorID;
 
-  @BuiltValueField(wireName: 'Lvl_1')
-  BuiltList<DocumentReference>? get lvl1;
-
-  @BuiltValueField(wireName: 'User_Database')
-  DocumentReference? get userDatabase;
-
-  @BuiltValueField(wireName: 'User_Databse_Ref')
-  String? get userDatabseRef;
-
   @BuiltValueField(wireName: 'ZKT_balance')
   int? get zKTBalance;
 
@@ -62,6 +53,9 @@ abstract class UserRecord implements Built<UserRecord, UserRecordBuilder> {
 
   String? get city;
 
+  @BuiltValueField(wireName: 'Level1_Direct')
+  BuiltList<DocumentReference>? get level1Direct;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -74,8 +68,6 @@ abstract class UserRecord implements Built<UserRecord, UserRecordBuilder> {
     ..phoneNumber = ''
     ..refferralID = ''
     ..sponsorID = ''
-    ..lvl1 = ListBuilder()
-    ..userDatabseRef = ''
     ..zKTBalance = 0
     ..zKTWalletAddress = ''
     ..directIncome = 0
@@ -83,7 +75,8 @@ abstract class UserRecord implements Built<UserRecord, UserRecordBuilder> {
     ..allIncome = 0
     ..upline = ''
     ..claimedtoken = false
-    ..city = '';
+    ..city = ''
+    ..level1Direct = ListBuilder();
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('user');
@@ -114,8 +107,6 @@ Map<String, dynamic> createUserRecordData({
   String? phoneNumber,
   String? refferralID,
   String? sponsorID,
-  DocumentReference? userDatabase,
-  String? userDatabseRef,
   int? zKTBalance,
   String? zKTWalletAddress,
   int? directIncome,
@@ -137,9 +128,6 @@ Map<String, dynamic> createUserRecordData({
         ..phoneNumber = phoneNumber
         ..refferralID = refferralID
         ..sponsorID = sponsorID
-        ..lvl1 = null
-        ..userDatabase = userDatabase
-        ..userDatabseRef = userDatabseRef
         ..zKTBalance = zKTBalance
         ..zKTWalletAddress = zKTWalletAddress
         ..directIncome = directIncome
@@ -147,7 +135,8 @@ Map<String, dynamic> createUserRecordData({
         ..allIncome = allIncome
         ..upline = upline
         ..claimedtoken = claimedtoken
-        ..city = city,
+        ..city = city
+        ..level1Direct = null,
     ),
   );
 

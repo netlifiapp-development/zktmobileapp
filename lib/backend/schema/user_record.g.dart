@@ -75,31 +75,6 @@ class _$UserRecordSerializer implements StructuredSerializer<UserRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.lvl1;
-    if (value != null) {
-      result
-        ..add('Lvl_1')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(BuiltList, const [
-              const FullType(
-                  DocumentReference, const [const FullType.nullable(Object)])
-            ])));
-    }
-    value = object.userDatabase;
-    if (value != null) {
-      result
-        ..add('User_Database')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(
-                DocumentReference, const [const FullType.nullable(Object)])));
-    }
-    value = object.userDatabseRef;
-    if (value != null) {
-      result
-        ..add('User_Databse_Ref')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
     value = object.zKTBalance;
     if (value != null) {
       result
@@ -151,6 +126,16 @@ class _$UserRecordSerializer implements StructuredSerializer<UserRecord> {
         ..add('city')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
+    }
+    value = object.level1Direct;
+    if (value != null) {
+      result
+        ..add('Level1_Direct')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(BuiltList, const [
+              const FullType(
+                  DocumentReference, const [const FullType.nullable(Object)])
+            ])));
     }
     value = object.ffRef;
     if (value != null) {
@@ -206,23 +191,6 @@ class _$UserRecordSerializer implements StructuredSerializer<UserRecord> {
           result.sponsorID = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'Lvl_1':
-          result.lvl1.replace(serializers.deserialize(value,
-              specifiedType: const FullType(BuiltList, const [
-                const FullType(
-                    DocumentReference, const [const FullType.nullable(Object)])
-              ]))! as BuiltList<Object?>);
-          break;
-        case 'User_Database':
-          result.userDatabase = serializers.deserialize(value,
-              specifiedType: const FullType(DocumentReference, const [
-                const FullType.nullable(Object)
-              ])) as DocumentReference<Object?>?;
-          break;
-        case 'User_Databse_Ref':
-          result.userDatabseRef = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
         case 'ZKT_balance':
           result.zKTBalance = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int?;
@@ -255,6 +223,13 @@ class _$UserRecordSerializer implements StructuredSerializer<UserRecord> {
           result.city = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'Level1_Direct':
+          result.level1Direct.replace(serializers.deserialize(value,
+              specifiedType: const FullType(BuiltList, const [
+                const FullType(
+                    DocumentReference, const [const FullType.nullable(Object)])
+              ]))! as BuiltList<Object?>);
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -286,12 +261,6 @@ class _$UserRecord extends UserRecord {
   @override
   final String? sponsorID;
   @override
-  final BuiltList<DocumentReference<Object?>>? lvl1;
-  @override
-  final DocumentReference<Object?>? userDatabase;
-  @override
-  final String? userDatabseRef;
-  @override
   final int? zKTBalance;
   @override
   final String? zKTWalletAddress;
@@ -308,6 +277,8 @@ class _$UserRecord extends UserRecord {
   @override
   final String? city;
   @override
+  final BuiltList<DocumentReference<Object?>>? level1Direct;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$UserRecord([void Function(UserRecordBuilder)? updates]) =>
@@ -322,9 +293,6 @@ class _$UserRecord extends UserRecord {
       this.phoneNumber,
       this.refferralID,
       this.sponsorID,
-      this.lvl1,
-      this.userDatabase,
-      this.userDatabseRef,
       this.zKTBalance,
       this.zKTWalletAddress,
       this.directIncome,
@@ -333,6 +301,7 @@ class _$UserRecord extends UserRecord {
       this.upline,
       this.claimedtoken,
       this.city,
+      this.level1Direct,
       this.ffRef})
       : super._();
 
@@ -355,9 +324,6 @@ class _$UserRecord extends UserRecord {
         phoneNumber == other.phoneNumber &&
         refferralID == other.refferralID &&
         sponsorID == other.sponsorID &&
-        lvl1 == other.lvl1 &&
-        userDatabase == other.userDatabase &&
-        userDatabseRef == other.userDatabseRef &&
         zKTBalance == other.zKTBalance &&
         zKTWalletAddress == other.zKTWalletAddress &&
         directIncome == other.directIncome &&
@@ -366,6 +332,7 @@ class _$UserRecord extends UserRecord {
         upline == other.upline &&
         claimedtoken == other.claimedtoken &&
         city == other.city &&
+        level1Direct == other.level1Direct &&
         ffRef == other.ffRef;
   }
 
@@ -380,9 +347,6 @@ class _$UserRecord extends UserRecord {
     _$hash = $jc(_$hash, phoneNumber.hashCode);
     _$hash = $jc(_$hash, refferralID.hashCode);
     _$hash = $jc(_$hash, sponsorID.hashCode);
-    _$hash = $jc(_$hash, lvl1.hashCode);
-    _$hash = $jc(_$hash, userDatabase.hashCode);
-    _$hash = $jc(_$hash, userDatabseRef.hashCode);
     _$hash = $jc(_$hash, zKTBalance.hashCode);
     _$hash = $jc(_$hash, zKTWalletAddress.hashCode);
     _$hash = $jc(_$hash, directIncome.hashCode);
@@ -391,6 +355,7 @@ class _$UserRecord extends UserRecord {
     _$hash = $jc(_$hash, upline.hashCode);
     _$hash = $jc(_$hash, claimedtoken.hashCode);
     _$hash = $jc(_$hash, city.hashCode);
+    _$hash = $jc(_$hash, level1Direct.hashCode);
     _$hash = $jc(_$hash, ffRef.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -407,9 +372,6 @@ class _$UserRecord extends UserRecord {
           ..add('phoneNumber', phoneNumber)
           ..add('refferralID', refferralID)
           ..add('sponsorID', sponsorID)
-          ..add('lvl1', lvl1)
-          ..add('userDatabase', userDatabase)
-          ..add('userDatabseRef', userDatabseRef)
           ..add('zKTBalance', zKTBalance)
           ..add('zKTWalletAddress', zKTWalletAddress)
           ..add('directIncome', directIncome)
@@ -418,6 +380,7 @@ class _$UserRecord extends UserRecord {
           ..add('upline', upline)
           ..add('claimedtoken', claimedtoken)
           ..add('city', city)
+          ..add('level1Direct', level1Direct)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -458,22 +421,6 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
   String? get sponsorID => _$this._sponsorID;
   set sponsorID(String? sponsorID) => _$this._sponsorID = sponsorID;
 
-  ListBuilder<DocumentReference<Object?>>? _lvl1;
-  ListBuilder<DocumentReference<Object?>> get lvl1 =>
-      _$this._lvl1 ??= new ListBuilder<DocumentReference<Object?>>();
-  set lvl1(ListBuilder<DocumentReference<Object?>>? lvl1) =>
-      _$this._lvl1 = lvl1;
-
-  DocumentReference<Object?>? _userDatabase;
-  DocumentReference<Object?>? get userDatabase => _$this._userDatabase;
-  set userDatabase(DocumentReference<Object?>? userDatabase) =>
-      _$this._userDatabase = userDatabase;
-
-  String? _userDatabseRef;
-  String? get userDatabseRef => _$this._userDatabseRef;
-  set userDatabseRef(String? userDatabseRef) =>
-      _$this._userDatabseRef = userDatabseRef;
-
   int? _zKTBalance;
   int? get zKTBalance => _$this._zKTBalance;
   set zKTBalance(int? zKTBalance) => _$this._zKTBalance = zKTBalance;
@@ -508,6 +455,12 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
   String? get city => _$this._city;
   set city(String? city) => _$this._city = city;
 
+  ListBuilder<DocumentReference<Object?>>? _level1Direct;
+  ListBuilder<DocumentReference<Object?>> get level1Direct =>
+      _$this._level1Direct ??= new ListBuilder<DocumentReference<Object?>>();
+  set level1Direct(ListBuilder<DocumentReference<Object?>>? level1Direct) =>
+      _$this._level1Direct = level1Direct;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -527,9 +480,6 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
       _phoneNumber = $v.phoneNumber;
       _refferralID = $v.refferralID;
       _sponsorID = $v.sponsorID;
-      _lvl1 = $v.lvl1?.toBuilder();
-      _userDatabase = $v.userDatabase;
-      _userDatabseRef = $v.userDatabseRef;
       _zKTBalance = $v.zKTBalance;
       _zKTWalletAddress = $v.zKTWalletAddress;
       _directIncome = $v.directIncome;
@@ -538,6 +488,7 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
       _upline = $v.upline;
       _claimedtoken = $v.claimedtoken;
       _city = $v.city;
+      _level1Direct = $v.level1Direct?.toBuilder();
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -571,9 +522,6 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
               phoneNumber: phoneNumber,
               refferralID: refferralID,
               sponsorID: sponsorID,
-              lvl1: _lvl1?.build(),
-              userDatabase: userDatabase,
-              userDatabseRef: userDatabseRef,
               zKTBalance: zKTBalance,
               zKTWalletAddress: zKTWalletAddress,
               directIncome: directIncome,
@@ -582,12 +530,13 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
               upline: upline,
               claimedtoken: claimedtoken,
               city: city,
+              level1Direct: _level1Direct?.build(),
               ffRef: ffRef);
     } catch (_) {
       late String _$failedField;
       try {
-        _$failedField = 'lvl1';
-        _lvl1?.build();
+        _$failedField = 'level1Direct';
+        _level1Direct?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             r'UserRecord', _$failedField, e.toString());

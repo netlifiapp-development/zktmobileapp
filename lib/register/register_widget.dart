@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/random_data_util.dart' as random_data;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -52,8 +53,6 @@ class _RegisterWidgetState extends State<RegisterWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
       child: Scaffold(
@@ -433,77 +432,76 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 16.0),
                                   child: FFButtonWidget(
-                                    onPressed: _model
-                                                .refferredbyController.text !=
-                                            ''
-                                        ? null
-                                        : () async {
-                                            GoRouter.of(context)
-                                                .prepareAuthEvent();
-                                            if (_model
-                                                    .passwordController.text !=
-                                                _model.passwordConfirmController
-                                                    .text) {
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
-                                                SnackBar(
-                                                  content: Text(
-                                                    'Passwords don\'t match!',
-                                                  ),
-                                                ),
-                                              );
-                                              return;
-                                            }
+                                    onPressed: () async {
+                                      GoRouter.of(context).prepareAuthEvent();
+                                      if (_model.passwordController.text !=
+                                          _model
+                                              .passwordConfirmController.text) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'Passwords don\'t match!',
+                                            ),
+                                          ),
+                                        );
+                                        return;
+                                      }
 
-                                            final user = await authManager
-                                                .createAccountWithEmail(
-                                              context,
-                                              _model
-                                                  .emailAddressController.text,
-                                              _model.passwordController.text,
-                                            );
-                                            if (user == null) {
-                                              return;
-                                            }
+                                      final user = await authManager
+                                          .createAccountWithEmail(
+                                        context,
+                                        _model.emailAddressController.text,
+                                        _model.passwordController.text,
+                                      );
+                                      if (user == null) {
+                                        return;
+                                      }
 
-                                            final userCreateData =
-                                                createUserRecordData(
-                                              email: '',
-                                              sponsorID: valueOrDefault<String>(
-                                                _model
-                                                    .refferredbyController.text,
-                                                'ZKT010101',
-                                              ),
-                                              refferralID:
-                                                  'ZKT${valueOrDefault<String>(
-                                                random_data
-                                                    .randomInteger(
-                                                        000001, 999999)
-                                                    .toString(),
-                                                '123456',
-                                              )}',
-                                              claimedtoken: false,
-                                            );
-                                            await UserRecord.collection
-                                                .doc(user.uid)
-                                                .update(userCreateData);
+                                      final userCreateData =
+                                          createUserRecordData(
+                                        email: '',
+                                        sponsorID: valueOrDefault<String>(
+                                          _model.refferredbyController.text,
+                                          'ZKT010101',
+                                        ),
+                                        refferralID:
+                                            'ZKT${valueOrDefault<String>(
+                                          random_data
+                                              .randomInteger(000001, 999999)
+                                              .toString(),
+                                          '123456',
+                                        )}',
+                                        claimedtoken: false,
+                                      );
+                                      await UserRecord.collection
+                                          .doc(user.uid)
+                                          .update(userCreateData);
 
-                                            HapticFeedback.heavyImpact();
+                                      HapticFeedback.heavyImpact();
 
-                                            context.pushNamedAuth(
-                                              'Updateprofile',
-                                              mounted,
-                                              extra: <String, dynamic>{
-                                                kTransitionInfoKey:
-                                                    TransitionInfo(
-                                                  hasTransition: true,
-                                                  transitionType:
-                                                      PageTransitionType
-                                                          .bottomToTop,
-                                                ),
-                                              },
-                                            );
-                                          },
+                                      final commissionsCreateData =
+                                          createCommissionsRecordData(
+                                        userId:
+                                            _model.refferredbyController.text,
+                                        saleAmount: 100000,
+                                        commissionAmount: 10000,
+                                        saleDate: getCurrentTimestamp,
+                                        commissionLevel: 1,
+                                      );
+                                      var commissionsRecordReference =
+                                          CommissionsRecord.collection.doc();
+                                      await commissionsRecordReference
+                                          .set(commissionsCreateData);
+                                      _model.lvl1 =
+                                          CommissionsRecord.getDocumentFromData(
+                                              commissionsCreateData,
+                                              commissionsRecordReference);
+
+                                      context.goNamedAuth('Dashboard', mounted);
+
+                                      setState(() {});
+                                    },
                                     text: 'Create Account',
                                     options: FFButtonOptions(
                                       width: 370.0,

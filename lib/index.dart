@@ -10,3 +10,4 @@ export '/unilevel/unilevel_widget.dart' show UnilevelWidget;
 export '/settings/settings_widget.dart' show SettingsWidget;
 export '/lobstr/lobstr_widget.dart' show LobstrWidget;
 export '/addwallet/addwallet_widget.dart' show AddwalletWidget;
+export '/level_data/level_data_widget.dart' show LevelDataWidget;
